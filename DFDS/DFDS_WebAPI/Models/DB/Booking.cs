@@ -13,7 +13,5 @@ namespace DFDS_WebAPI.Models.DB
         public string Description { get; set; }
         public DateTime DateAndTime { get; set; }
 
-        //public List<Passenger> PassengerId { get; set; }
-
     }
 }

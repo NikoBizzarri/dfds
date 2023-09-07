@@ -104,7 +104,7 @@ namespace DFDS_WebAPI.Services
 
                 foreach (var rel in entry.Passengers)
                 {
-                    context.BookingPassengers.Add(new BookingPassenger{ BookingId = entry.Id, PassengerEmail = rel.Email });
+                    context.BookingPassengers.Add(new BookingPassenger { BookingId = entry.Id, PassengerEmail = rel.Email });
                 }
 
                 context.SaveChanges();
@@ -210,7 +210,7 @@ namespace DFDS_WebAPI.Services
             {
                 context.Bookings.Update(entry);
 
-                var oldRelationships = context.BookingPassengers.Where(X=> X.BookingId == entry.Id);
+                var oldRelationships = context.BookingPassengers.Where(X => X.BookingId == entry.Id);
                 context.BookingPassengers.RemoveRange(oldRelationships);
 
                 foreach (var rel in entry.Passengers)
@@ -218,8 +218,6 @@ namespace DFDS_WebAPI.Services
                     context.BookingPassengers.Add(new BookingPassenger { BookingId = entry.Id, PassengerEmail = rel.Email });
                 }
 
-
-                // TODO: update relationships 
                 context.SaveChanges();
 
                 return entry;

@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DFDS/.vs/DFDS/v16
+/DFDS/DFDS_WebAPI/obj

@@ -1,3 +1,5 @@
+using DFDS_WebAPI.Services;
+using DFDS_WebAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +34,10 @@ namespace DFDS_WebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DFDS_WebAPI", Version = "v1" });
             });
+
+            services.AddScoped<IRepository, Repository>();
+        
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,12 +54,15 @@ namespace DFDS_WebAPI
 
             app.UseRouting();
 
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+
         }
     }
 }

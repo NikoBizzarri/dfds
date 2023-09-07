@@ -45,7 +45,7 @@ namespace DFDS_WebAPI.Controllers
 
         [HttpPut]
         [Route("Update")]
-        public Booking Update(Booking entity)
+        public BookingDto Update(BookingDto entity)
         {
             var booking = _repo.UpdateBooking(entity);
             return booking;
@@ -53,7 +53,7 @@ namespace DFDS_WebAPI.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public Booking Create(BookingDto entity)
+        public BookingDto Create(BookingDto entity)
         {
             var booking = _repo.CreateBooking(entity);
             return booking;
@@ -61,7 +61,7 @@ namespace DFDS_WebAPI.Controllers
 
         [HttpDelete]
         [Route("Delete/{id}")]
-        public Booking Delete(int id)
+        public bool Delete(int id)
         {
             var booking = _repo.DeleteBookingById(id);
             return booking;

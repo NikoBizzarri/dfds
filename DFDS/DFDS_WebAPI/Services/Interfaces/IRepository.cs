@@ -12,8 +12,8 @@ namespace DFDS_WebAPI.Services.Interfaces
         #region CRUD bookings
         AllBookingsDto GetAllBookings();
         BookingDto GetBookingById(int id);
-        Booking UpdateBooking(Booking entry); // todo: use DTO instead
-        Booking DeleteBookingById(int id);
+        BookingDto UpdateBooking(BookingDto entry); // todo: use DTO instead
+        bool DeleteBookingById(int id);
         BookingDto CreateBooking(BookingDto entry); // todo: use DTO instead
 
         #endregion

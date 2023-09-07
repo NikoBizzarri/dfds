@@ -127,7 +127,7 @@ namespace DFDS_WebAPI.Services
             }
         }
 
-        public Booking DeleteBookingById(int id)
+        public bool DeleteBookingById(int id)
         {
             using (var context = new WebApiDbContext())
             {
@@ -135,8 +135,12 @@ namespace DFDS_WebAPI.Services
 
                 var result = context.Bookings.Remove(toRemove);
 
+                var relToRemove = context.BookingPassengers.Where(x => x.BookingId == id);
+
+                context.BookingPassengers.RemoveRange(relToRemove);
+
                 context.SaveChanges();
-                return toRemove;
+                return true; ;
             }
         }
 
@@ -200,11 +204,22 @@ namespace DFDS_WebAPI.Services
             }
         }
 
-        public Booking UpdateBooking(Booking entry)
+        public BookingDto UpdateBooking(BookingDto entry)
         {
             using (var context = new WebApiDbContext())
             {
                 context.Bookings.Update(entry);
+
+                var oldRelationships = context.BookingPassengers.Where(X=> X.BookingId == entry.Id);
+                context.BookingPassengers.RemoveRange(oldRelationships);
+
+                foreach (var rel in entry.Passengers)
+                {
+                    context.BookingPassengers.Add(new BookingPassenger { BookingId = entry.Id, PassengerEmail = rel.Email });
+                }
+
+
+                // TODO: update relationships 
                 context.SaveChanges();
 
                 return entry;

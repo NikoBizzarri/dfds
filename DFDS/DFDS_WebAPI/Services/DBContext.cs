@@ -16,5 +16,6 @@ namespace DFDS_WebAPI.Services
         }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<BookingPassenger> BookingPassengers { get; set; }
     }
 }

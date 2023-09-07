@@ -58,7 +58,7 @@ namespace DFDS_WebAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("Delete/{id}")]
+        [Route("Delete/{email}")]
         public Passenger Delete(string email)
         {
             var passenger = _repo.DeletePassengerByEmail(email);

@@ -1,4 +1,5 @@
 ﻿using DFDS_WebAPI.Models.DB;
+using DFDS_WebAPI.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace DFDS_WebAPI.Services.Interfaces
         Booking GetBookingById(int id);
         Booking UpdateBooking(Booking entry); // todo: use DTO instead
         Booking DeleteBookingById(int id);
-        Booking CreateBooking(Booking entry); // todo: use DTO instead
+        BookigDto CreateBooking(BookigDto entry); // todo: use DTO instead
 
         #endregion
 

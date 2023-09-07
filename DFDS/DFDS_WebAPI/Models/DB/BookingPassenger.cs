@@ -12,6 +12,6 @@ namespace DFDS_WebAPI.Models.DB
         [Key]
         public int Id { get; set; }
         public int BookingId { get; set; }
-        public int PassengerId { get; set; }
+        public string PassengerEmail { get; set; }
     }
 }

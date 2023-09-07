@@ -1,4 +1,5 @@
 ﻿using DFDS_WebAPI.Models.DB;
+using DFDS_WebAPI.Models.DTOs;
 using DFDS_WebAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,7 +53,7 @@ namespace DFDS_WebAPI.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public Booking Create(Booking entity)
+        public Booking Create(BookigDto entity)
         {
             var booking = _repo.CreateBooking(entity);
             return booking;

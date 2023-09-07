@@ -1,4 +1,5 @@
 ﻿using DFDS_WebAPI.Models.DB;
+using DFDS_WebAPI.Models.DTOs;
 using DFDS_WebAPI.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -43,30 +44,67 @@ namespace DFDS_WebAPI.Services
                 {
                     DateAndTime = DateTime.UtcNow.AddDays(-13),
                     Id = 1,
-                    Description = "this is a booking",
-                    Passengers = passengers
+                    Description = "this is a booking"
                 },
                 new Booking
                 {
                     DateAndTime = DateTime.UtcNow.AddDays(-13),
                     Id = 2,
-                    Description = "this is a second booking",
-                    Passengers = passengers.Take(1).ToList()
-                },
+                    Description = "this is a second booking"
+                }
                 };
                 if (!context.Bookings.Any())
                 {
                     context.Bookings.AddRange(bookings);
                     context.SaveChanges();
                 }
+
+                var bookingPass = new List<BookingPassenger>
+                {
+                new BookingPassenger
+                {
+                    Id = 1,
+                    BookingId = bookings.FirstOrDefault().Id,
+                    PassengerEmail = passengers.FirstOrDefault().Email
+                },
+                new BookingPassenger
+                {
+                    Id = 2,
+                    BookingId = bookings.FirstOrDefault().Id,
+                    PassengerEmail = passengers.LastOrDefault().Email
+                },
+                new BookingPassenger
+                {
+                    Id = 3,
+                    BookingId = bookings.LastOrDefault().Id,
+                    PassengerEmail = passengers.LastOrDefault().Email
+                },
+                new BookingPassenger
+                {
+                    Id = 4,
+                    BookingId = bookings.LastOrDefault().Id,
+                    PassengerEmail = passengers.FirstOrDefault().Email
+                },
+                };
+                if (!context.BookingPassengers.Any())
+                {
+                    context.BookingPassengers.AddRange(bookingPass);
+                    context.SaveChanges();
+                }
+
             }
         }
 
-        public Booking CreateBooking(Booking entry)
+        public BookigDto CreateBooking(BookigDto entry)
         {
             using (var context = new WebApiDbContext())
             {
                 var result = context.Bookings.Add(entry);
+
+                foreach (var rel in entry.Passengers)
+                {
+                    context.BookingPassengers.Add(new BookingPassenger{ BookingId = entry.Id, PassengerEmail = rel.Email });
+                }
 
                 context.SaveChanges();
                 // todo: set ID as auto increment 
@@ -80,8 +118,8 @@ namespace DFDS_WebAPI.Services
             using (var context = new WebApiDbContext())
             {
                 var result = context.Passengers.Add(entry);
-                
-                context.SaveChanges(); 
+
+                context.SaveChanges();
                 // todo: set ID as auto increment 
                 // todo: read the new entity after creation and return it
                 return entry;
@@ -92,7 +130,7 @@ namespace DFDS_WebAPI.Services
         {
             using (var context = new WebApiDbContext())
             {
-                var toRemove = context.Bookings.FirstOrDefault(x => x.Id == id );
+                var toRemove = context.Bookings.FirstOrDefault(x => x.Id == id);
 
                 var result = context.Bookings.Remove(toRemove);
 
@@ -118,9 +156,19 @@ namespace DFDS_WebAPI.Services
         {
             using (var context = new WebApiDbContext())
             {
-                var list = context.Bookings
-                    .ToList();
-                return list;
+                AllBookingsDto result = new AllBookingsDto();
+
+                var bookings = context.Bookings.ToList();
+
+                //foreach (var booking in bookings)
+                //{
+                //    var bookingRelations = context.BookingPassengers.Where(x => x.BookingId == booking.Id);
+                //    result
+                // todo continue implementing...
+                //}
+
+
+                return bookings;
             }
         }
 

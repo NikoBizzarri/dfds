@@ -11,10 +11,10 @@ namespace DFDS_WebAPI.Services.Interfaces
     {
         #region CRUD bookings
         AllBookingsDto GetAllBookings();
-        Booking GetBookingById(int id);
+        BookingDto GetBookingById(int id);
         Booking UpdateBooking(Booking entry); // todo: use DTO instead
         Booking DeleteBookingById(int id);
-        BookigDto CreateBooking(BookigDto entry); // todo: use DTO instead
+        BookingDto CreateBooking(BookingDto entry); // todo: use DTO instead
 
         #endregion
 

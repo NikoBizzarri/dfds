@@ -96,7 +96,7 @@ namespace DFDS_WebAPI.Services
             }
         }
 
-        public BookigDto CreateBooking(BookigDto entry)
+        public BookingDto CreateBooking(BookingDto entry)
         {
             using (var context = new WebApiDbContext())
             {
@@ -163,14 +163,6 @@ namespace DFDS_WebAPI.Services
 
                 var result = MappingHelper.MapAllBookings(bookings, passengers, rel);
 
-                //foreach (var booking in bookings)
-                //{
-                //    var bookingRelations = context.BookingPassengers.Where(x => x.BookingId == booking.Id);
-                //    result
-                // todo continue implementing...
-                //}
-
-
                 return result;
             }
         }
@@ -185,11 +177,16 @@ namespace DFDS_WebAPI.Services
             }
         }
 
-        public Booking GetBookingById(int id)
+        public BookingDto GetBookingById(int id)
         {
             using (var context = new WebApiDbContext())
             {
-                var result = context.Bookings.FirstOrDefault(x => x.Id == id);
+
+                var booking = context.Bookings.FirstOrDefault(x => x.Id == id);
+                var rel = context.BookingPassengers.ToList();
+                var passengers = context.Passengers.ToList();
+
+                var result = MappingHelper.MapBooking(booking, passengers, rel);
                 return result;
             }
         }

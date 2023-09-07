@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace DFDS_WebAPI.Models.DTOs
 {
-    public class BookigDto : Booking
+    public class BookingDto : Booking
     {
-        public BookigDto()
+        public BookingDto()
         {
             Passengers = new List<Passenger>();
         }
-        //    public int Id { get; set; }
-        //    public string Description { get; set; }
-        //    public DateTime DateAndTime { get; set; }
 
         // passenger
         public List<Passenger> Passengers { get; set; }
@@ -24,8 +21,8 @@ namespace DFDS_WebAPI.Models.DTOs
     {
         public AllBookingsDto()
         {
-            Bookings = new List<BookigDto>();
+            Bookings = new List<BookingDto>();
         }
-        public List<BookigDto> Bookings  {get; set;}
+        public List<BookingDto> Bookings  {get; set;}
 }
 }

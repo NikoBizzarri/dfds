@@ -37,7 +37,7 @@ namespace DFDS_WebAPI.Controllers
 
         [HttpGet]
         [Route("GetbyId/{id}")]
-        public Booking GetbyId(int id)
+        public BookingDto GetbyId(int id)
         {
             var booking = _repo.GetBookingById(id);
             return booking;
@@ -53,7 +53,7 @@ namespace DFDS_WebAPI.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public Booking Create(BookigDto entity)
+        public Booking Create(BookingDto entity)
         {
             var booking = _repo.CreateBooking(entity);
             return booking;

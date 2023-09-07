@@ -1,4 +1,5 @@
-﻿using DFDS_WebAPI.Models.DB;
+﻿using DFDS_WebAPI.Helpers;
+using DFDS_WebAPI.Models.DB;
 using DFDS_WebAPI.Models.DTOs;
 using DFDS_WebAPI.Services.Interfaces;
 using System;
@@ -79,12 +80,12 @@ namespace DFDS_WebAPI.Services
                     BookingId = bookings.LastOrDefault().Id,
                     PassengerEmail = passengers.LastOrDefault().Email
                 },
-                new BookingPassenger
-                {
-                    Id = 4,
-                    BookingId = bookings.LastOrDefault().Id,
-                    PassengerEmail = passengers.FirstOrDefault().Email
-                },
+                //new BookingPassenger
+                //{
+                //    Id = 4,
+                //    BookingId = bookings.LastOrDefault().Id,
+                //    PassengerEmail = passengers.FirstOrDefault().Email
+                //},
                 };
                 if (!context.BookingPassengers.Any())
                 {
@@ -152,13 +153,15 @@ namespace DFDS_WebAPI.Services
             }
         }
 
-        public List<Booking> GetAllBookings()
+        public AllBookingsDto GetAllBookings()
         {
             using (var context = new WebApiDbContext())
             {
-                AllBookingsDto result = new AllBookingsDto();
-
                 var bookings = context.Bookings.ToList();
+                var rel = context.BookingPassengers.ToList();
+                var passengers = context.Passengers.ToList();
+
+                var result = MappingHelper.MapAllBookings(bookings, passengers, rel);
 
                 //foreach (var booking in bookings)
                 //{
@@ -168,7 +171,7 @@ namespace DFDS_WebAPI.Services
                 //}
 
 
-                return bookings;
+                return result;
             }
         }
 

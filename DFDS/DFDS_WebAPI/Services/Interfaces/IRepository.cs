@@ -10,7 +10,7 @@ namespace DFDS_WebAPI.Services.Interfaces
     public interface IRepository
     {
         #region CRUD bookings
-        List<Booking> GetAllBookings();
+        AllBookingsDto GetAllBookings();
         Booking GetBookingById(int id);
         Booking UpdateBooking(Booking entry); // todo: use DTO instead
         Booking DeleteBookingById(int id);

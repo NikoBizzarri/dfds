@@ -8,6 +8,10 @@ namespace DFDS_WebAPI.Models.DTOs
 {
     public class BookigDto : Booking
     {
+        public BookigDto()
+        {
+            Passengers = new List<Passenger>();
+        }
         //    public int Id { get; set; }
         //    public string Description { get; set; }
         //    public DateTime DateAndTime { get; set; }
@@ -18,6 +22,10 @@ namespace DFDS_WebAPI.Models.DTOs
 
     public class AllBookingsDto
     {
-        public List<BookigDto> Bookings => new List<BookigDto>();
-    }
+        public AllBookingsDto()
+        {
+            Bookings = new List<BookigDto>();
+        }
+        public List<BookigDto> Bookings  {get; set;}
+}
 }

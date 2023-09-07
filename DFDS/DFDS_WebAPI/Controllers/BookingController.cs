@@ -29,7 +29,7 @@ namespace DFDS_WebAPI.Controllers
         // rest compliant
         [HttpGet]
         [Route("GetAll")]
-        public IEnumerable<Booking> GetAll()
+        public AllBookingsDto GetAll()
         {
             var bookings = _repo.GetAllBookings();
             return bookings;

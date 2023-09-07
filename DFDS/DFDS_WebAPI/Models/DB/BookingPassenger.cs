@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace DFDS_WebAPI.Models.DB
 {
-    [Obsolete]
     public class BookingPassenger
     {
         [Key]
